@@ -10,7 +10,9 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY api/ ./api/
-COPY migrations/ ./migrations/
 
 EXPOSE 8000
+# Data lives in a bind-mounted volume; see deploy/compose.yml.
+ENV OTA_DB_PATH=/srv/ota/db/ota.db
+
 CMD ["uvicorn", "api.main:app", "--host", "0.0.0.0", "--port", "8000"]

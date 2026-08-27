@@ -1,8 +1,7 @@
 fastapi>=0.115
 uvicorn[standard]>=0.32
 pydantic>=2.9
-sqlalchemy>=2.0
-alembic>=1.14
-psycopg[binary]>=3.2
-python-jose[cryptography]>=3.3
-httpx>=0.27
+
+# Storage is stdlib sqlite3 -- one file, no server process, and far less write
+# amplification than postgres, which matters while this runs from an SD card.
+# Swap in SQLAlchemy + postgres when the fleet outgrows a single writer.
